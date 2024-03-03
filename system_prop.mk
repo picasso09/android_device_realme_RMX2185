@@ -9,7 +9,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Display
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.sf.lcd_density=410
+    ro.sf.lcd_density=320
 
 # IMS
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -48,12 +48,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000 \
     debug.sf.enable_hwc_vds=0
 
-# Blur
-PRODUCT_SYSTEM_EXT_PROPERTIES += \
-    ro.sf.blurs_are_expensive=1 \
-    ro.surface_flinger.supports_background_blur=1 \
-    ro.launcher.blur.appLaunch=0
-
 # ZRAM
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.zram.mark_idle_delay_mins=60 \
@@ -71,6 +65,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.dha_th_rate=2.3 \
     ro.config.sdha_apps_bg_max=64 \
     ro.config.sdha_apps_bg_min=8
+
+# GBoard
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.ime.kb_pad_port_b=1
 
 # WFD
 PRODUCT_PROPERTY_OVERRIDES += \

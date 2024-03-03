@@ -17,25 +17,26 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
 
 # Inherit from device makefile
 $(call inherit-product, device/realme/RMX2185/device.mk)
 
 # Inherit some common NusantaraProject stuff.
-$(call inherit-product, vendor/afterlife/config/common_full_phone.mk)
+$(call inherit-product, vendor/nusantara/config/common_full_phone.mk)
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := afterlife_RMX2185
+PRODUCT_NAME := nad_RMX2185
 PRODUCT_DEVICE := RMX2185
 PRODUCT_BRAND := realme
 PRODUCT_MODEL := RMX2185
 PRODUCT_MANUFACTURER := realme
 
-# AfterLife additions
+# nadFest additions
 IS_PHONE := true
-AFTERLIFE_BUILD_TYPE := COMMUNITY
-AFTERLIFE_GAPPS := true
-BUILD_HOSTNAME := DVWORKSPACE
+NAD_BUILD_TYPE := UNOFFICIAL
+
+BUILD_HOSTNAME := aospteam
 TARGET_FACE_UNLOCK_SUPPORTED := true
 TARGET_BOOT_ANIMATION_RES := 720
 

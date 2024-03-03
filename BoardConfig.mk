@@ -26,8 +26,6 @@ BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
-BUILD_BROKEN_ENFORCE_SYSPROP_OWNER := true
-BUILD_BROKEN_TREBLE_SYSPROP_NEVERALLOW := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -62,8 +60,7 @@ BUILD_BROKEN_DUP_RULES := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
-BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery androidboot.selinux=permissive
 
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_OFFSET := 0x00008000
@@ -98,11 +95,11 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_mt6765
 TARGET_RECOVERY_DEVICE_MODULES := libinit_mt6765
 
+# HIDL
+#DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
+
 # Mediatek IMS
 #TARGET_PROVIDES_MEDIATEK_IMS_STACK := true
-
-# Properties
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)system.prop
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
@@ -157,13 +154,13 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS := $(DEVICE_PATH)/sepolicy/private
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # Symbols
-TARGET_LD_SHIM_LIBS := /system/lib/libshowlogo.so|libshim_showlogo.so
+#TARGET_LD_SHIM_LIBS := /system/lib/libshowlogo.so|libshim_showlogo.so
 
 # Treble
 TARGET_COPY_OUT_PRODUCT := system/product
 
 #DPI
-TARGET_SCREEN_DENSITY := 410
+TARGET_SCREEN_DENSITY := 360
 
 # HWUI
 HWUI_COMPILE_FOR_PERF := true

@@ -31,7 +31,7 @@ $(call inherit-product, vendor/realme/RMX2185-ims/RMX2185-ims.mk)
 PRODUCT_SHIPPING_API_LEVEL := 29
 
 # VNDK
-PRODUCT_EXTRA_VNDK_VERSIONS := 29
+PRODUCT_TARGET_VNDK_VERSION := current
 
 # Dynamic Partition
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -44,6 +44,7 @@ TARGET_BOOTANIM_LOW_RES := true
 
 # Audio
 PRODUCT_PACKAGES += \
+    audio.a2dp.default \
     audio.bluetooth.default  \
     GoogleCameraGo
 
@@ -100,6 +101,7 @@ PRODUCT_COPY_FILES += \
 # KPOC
 PRODUCT_PACKAGES += \
     libsuspend \
+    android.hardware.health@1.0 \
     android.hardware.health@2.0
 
 # Lights
@@ -110,21 +112,15 @@ PRODUCT_PACKAGES += \
 DEVICE_PACKAGE_OVERLAYS += \
     $(DEVICE_PATH)/overlay
 
-PRODUCT_PACKAGES += \
-    NotchBarKiller
-
-PRODUCT_PACKAGES += \
-    RMX2180_overlay \
-    RMX2185_overlay \
-    RMX2189_overlay
-
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.controls.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.controls.xml \
+    frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.ethernet.xml \
+    frameworks/native/data/etc/android.hardware.faketouch.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.faketouch.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.multitouch.distinct.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.usb.host.xml \
     $(DEVICE_PATH)/permissions/privapp-permissions-mediatek.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-mediatek.xml \
-    $(DEVICE_PATH)/permissions/privapp-permissions-whitelist-system.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-whitelist-system.xml \
-    $(DEVICE_PATH)/permissions/privapp-permissions-whitelist-system_ext.xml:$(TARGET_COPY_OUT_SYSTEM)/system_ext/etc/permissions/privapp-permissions-whitelist-system_ext.xml \
-    $(DEVICE_PATH)/permissions/privapp-permissions-whitelist-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-whitelist-product.xml
 
 # Properties
 -include $(DEVICE_PATH)/system_prop.mk
@@ -133,12 +129,6 @@ PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 # Recovery
 PRODUCT_PACKAGES += \
     init.recovery.mt6765.rc
-
-# Bootctrl
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl-qti \
-    android.hardware.boot@1.2-impl-qti.recovery \
-    android.hardware.boot@1.2-service
 
 # RcsService
 PRODUCT_PACKAGES += \
@@ -154,13 +144,9 @@ PRODUCT_AAPT_PREBUILT_DPI := xhdpi xxhdpi
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
 
-# Inherit several Android Go Configurations (Beneficial for everyone, even on non-Go devices)
-PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
-PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-image-profile.txt
-
 # Symbols
-PRODUCT_PACKAGES += \
-    libshim_showlogo
+#PRODUCT_PACKAGES += \
+#    libshim_showlogo
 	
 # ThemePicker
 PRODUCT_PACKAGES += \
@@ -168,7 +154,4 @@ PRODUCT_PACKAGES += \
     messaging
 
 # Wi-Fi
-PRODUCT_PACKAGES += \
-    TetheringConfigOverlay \
-    wpa_supplicant.conf \
-    WifiOverlay
+PRODUCT_PACKAGES += wpa_supplicant.conf
