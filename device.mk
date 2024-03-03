@@ -143,10 +143,6 @@ PRODUCT_AAPT_PREBUILT_DPI := xhdpi xxhdpi
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
-
-# Symbols
-#PRODUCT_PACKAGES += \
-#    libshim_showlogo
 	
 # ThemePicker
 PRODUCT_PACKAGES += \

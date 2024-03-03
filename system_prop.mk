@@ -1,4 +1,3 @@
-
 # Bootanimation
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.config.nocheckin=1
