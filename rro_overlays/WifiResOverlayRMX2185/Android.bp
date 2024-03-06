@@ -1,6 +1,0 @@
-runtime_resource_overlay {
-    name: "WifiResOverlayRMX2185",
-    theme: "WifiResOverlay",
-    sdk_version: "current",
-    vendor: true
-}
