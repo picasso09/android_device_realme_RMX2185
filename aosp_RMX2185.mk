@@ -22,7 +22,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from device makefile
 $(call inherit-product, device/realme/RMX2185/device.mk)
 
-# Inherit some common NusantaraProject stuff.
+# Inherit some common PixelExperience stuff.
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 # Device identifier. This must come after all inclusions.
@@ -32,11 +32,12 @@ PRODUCT_BRAND := realme
 PRODUCT_MODEL := RMX2185
 PRODUCT_MANUFACTURER := realme
 
-# aospFest additions
+# Pixel additions
 IS_PHONE := true
 AOSP_BUILD_TYPE := UNOFFICIAL
 BUILD_HOSTNAME := aospteam
 TARGET_FACE_UNLOCK_SUPPORTED := true
 TARGET_BOOT_ANIMATION_RES := 720
+TARGET_INCLUDE_STOCK_ARCORE := false
 
 PRODUCT_GMS_CLIENTID_BASE := android-realme
