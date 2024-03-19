@@ -1,5 +1,0 @@
-add_hwservice(mtk_hal_camera, hal_oppo_camera_hwservice)
-get_prop(mtk_hal_camera, vendor_oppo_camera_prop)
-get_prop(mtk_hal_camera, system_oppo_camera_prop)
-set_prop(mtk_hal_camera, vendor_oppo_camera_prop)
-set_prop(mtk_hal_camera, system_oppo_camera_prop)

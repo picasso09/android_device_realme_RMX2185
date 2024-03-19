@@ -1,1 +1,0 @@
-allow platform_app sysfs_fps:file r_file_perms;

@@ -1,6 +1,0 @@
-runtime_resource_overlay {
-    name: "TetheringResOverlayRMX2185",
-    theme: "TetheringResOverlay",
-    sdk_version: "current",
-    vendor: true
-}

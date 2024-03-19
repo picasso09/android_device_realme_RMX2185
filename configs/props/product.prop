@@ -1,5 +1,0 @@
-# Privapp permissions whitelisting
-ro.control_privapp_permissions=log
-
-# Project-Elixir stuff
-ro.maintainer.name=picasso09 X RzaIX

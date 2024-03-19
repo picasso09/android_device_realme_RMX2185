@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2019 The LineageOS Project
+// Copyright (C) 2020 The LineageOS Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,17 +15,13 @@
 //
 
 cc_library_static {
-    name: "libinit_RMX2185",
+    name: "libinit_mt6765",
     recovery_available: true,
-    srcs: ["init_RMX2185.cpp"],
-    header_libs: [
-        "libbase_headers",
-    ],
+    srcs: ["mt6765.cpp"],
+    whole_static_libs: ["libbase"],
     include_dirs: [
+        "system/core/base/include",
         "system/core/init"
     ],
-    shared_libs: [
-        "libbase",
-        "libfs_mgr",
-    ],
+    shared_libs: ["libbase"],
 }
