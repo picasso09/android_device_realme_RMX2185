@@ -20,3 +20,4 @@
 
 # Misc
 /system/bin/perf_profile\.sh	u:object_r:perf_profile_exec:s0
+/system/etc/init/set_zram\.sh   u:object_r:set_zram_exec:s0
