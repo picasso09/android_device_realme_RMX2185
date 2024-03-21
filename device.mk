@@ -45,6 +45,9 @@ TARGET_BOOTANIM_LOW_RES := true
 # Audio
 PRODUCT_PACKAGES += \
     audio.bluetooth.default  \
+    audio.r_submix.default \
+    audio.usb.default \
+    audio_policy.stub \
     GoogleCameraGo
 
 PRODUCT_COPY_FILES += \
