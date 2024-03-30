@@ -9,7 +9,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Display
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.sf.lcd_density=320
+    ro.sf.lcd_density=410
 
 # IMS
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \

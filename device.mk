@@ -48,7 +48,8 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     audio_policy.stub \
-    GoogleCameraGo
+    GoogleCameraGo \
+    Snap
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
@@ -121,11 +122,6 @@ PRODUCT_PACKAGES += \
     RMX2180_overlay \
     RMX2185_overlay \
     RMX2189_overlay
-
-# part
-PRODUCT_PACKAGES += \
-    parts.rc \
-    RealmeParts
 
 # Permissions
 PRODUCT_COPY_FILES += \
