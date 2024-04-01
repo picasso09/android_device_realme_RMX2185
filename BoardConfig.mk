@@ -159,7 +159,7 @@ TARGET_LD_SHIM_LIBS := /system/lib/libshowlogo.so|libshim_showlogo.so
 TARGET_COPY_OUT_PRODUCT := system/product
 
 #DPI
-TARGET_SCREEN_DENSITY := 360
+TARGET_SCREEN_DENSITY := 410
 
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
