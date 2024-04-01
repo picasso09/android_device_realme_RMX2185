@@ -45,6 +45,7 @@ TARGET_SCREEN_WIDTH := 720
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     GoogleCameraGo \
+    Snap \
     audio.bluetooth.default \
     audio.r_submix.default
 
