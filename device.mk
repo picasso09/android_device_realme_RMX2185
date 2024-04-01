@@ -17,7 +17,7 @@
 DEVICE_PATH := device/realme/RMX2185
 
 # Installs gsi keys into ramdisk, to boot a GSI with verified boot.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 
 # Call proprietary blob setup
 $(call inherit-product, vendor/realme/RMX2185/RMX2185-vendor.mk)
@@ -43,11 +43,12 @@ TARGET_SCREEN_WIDTH := 720
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
+    audio.bluetooth.default  \
+    audio.r_submix.default \
+    audio.usb.default \
+    audio_policy.stub \
     GoogleCameraGo \
-    Snap \
-    audio.bluetooth.default \
-    audio.r_submix.default
+    Snap
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
