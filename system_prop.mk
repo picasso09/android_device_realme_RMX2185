@@ -1,34 +1,21 @@
 # Blurs
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.surface_flinger.supports_background_blur=1 \
-    ro.sf.blurs_are_expensive=1 \
-
-# Camera
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.google.camera,org.pixelexperience.faceunlock \
-    vendor.camera.aux.packageblacklist=org.telegram.messenger,com.microsoft.teams,com.discord
-
-# Dex2oat
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    dalvik.vm.dex2oat64.enabled=true \
-    dalvik.vm.image-dex2oat-filter=quicken \
-    dalvik.vm.image-dex2oat-threads=8 \
-    dalvik.vm.image-dex2oat-cpu-set=0,1,2,3,4,5,6,7 \
-    dalvik.vm.dex2oat-filter=quicken \
-    dalvik.vm.dex2oat-threads=8 \
-    dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5,6,7 \
-    dalvik.vm.boot-dex2oat-threads=8 \
-    dalvik.vm.boot-dex2oat-cpu-set=0,1,2,3,4,5,6,7
-
-# Iorap
-PRODUCT_PROPERTY_OVERRIDES += \
-   iorapd.perfetto.enable=true \
-   iorapd.readahead.enable=true
+  ro.surface_flinger.supports_background_blur=1 \
+  ro.sf.blurs_are_expensive=1
 
 # Display
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.sf.lcd_density=320
-	
+    ro.sf.lcd_density=410
+
+# Camera
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.google.camera \
+    vendor.camera.aux.packageblacklist=org.telegram.messenger,com.microsoft.teams,com.discord
+
+# Audio
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.config.vc_call_vol_steps=7
+
 # Hardware Acceleration
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     video.accelerate.hw=1 \
@@ -41,14 +28,21 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # IMS
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.dbg.volte_avail_ovr=1 \
-    persist.dbg.vt_avail_ovr=1 \
-    persist.dbg.wfc_avail_ovr=1
-	
+    persist.dbg.vt_avail_ovr=1
+
 # LMKD
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.lmk.psi_complete_stall_ms=150 \
     ro.lmk.swap_free_low_percentage=20 \
     ro.lmk.kill_timeout_ms=100
+
+# NFC
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.sys.nfc.disPowerSave=1 \
+    persist.sys.nfc.default=on \
+    persist.sys.nfc.aid_overflow=true \
+    ro.product.cuptsm=OPPO|ESE|01|02 \
+    persist.sys.nfc.antenna_area=bottom
 
 # OMX
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -82,7 +76,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.zram.mark_idle_delay_mins=60 \
     ro.zram.first_wb_delay_mins=180 \
     ro.zram.periodic_wb_delay_hours=24
-	
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.device_config.runtime_native.usap_pool_enabled=true
+
 # Tweak the memory management of the device, enable more background apps.. etc..
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.fha_enable=true \
@@ -106,32 +103,90 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0
 
-# Props from realme UI 2.0 
+# Props from realme UI 2.0
 
 # Audio
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.camera.sound.forced=0 \
     ro.audio.silent=0
 
-# Wifi and Tethering
+# Wlan
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     wifi.interface=wlan0 \
     ro.mediatek.wlan.wsc=1 \
     ro.mediatek.wlan.p2p=1 \
-    mediatek.wlan.ctia=0 \
-    wifi.tethering.interface=ap0 \
-    wifi.direct.interface=p2p0
+    mediatek.wlan.ctia=0
 
 # USB Charge only function
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.sys.usb.charging.only=yes \
-    ro.sys.usb.bicr=no \
-    ro.sys.usb.storage.type=mtp
+    ro.sys.usb.bicr=no
 
-# USB MTP WHQL
+# LMKD
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.sys.usb.mtp.whql.enable=0
+    ro.config.low_ram=false \
+    ro.lmk.log_stats=true
 
-# Power off opt in IPO
+# One Handed Mode
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.support_one_handed_mode=true
+
+# System
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    sys.ipo.pwrdncap=2
+    persist.sys.binary_xml=false
+
+# Charger
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.charger.enable_suspend=true
+
+# Colors
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.sf.color_saturation=1.1 \
+    persist.sys.sf.native_mode=0
+
+# Renderengine
+PRODUCT_PRODUCT_PROPERTIES += \
+    debug.hwui.renderer=skiagl \
+    debug.renderengine.backend=skiaglthreaded \
+    renderthread.skia.reduceopstasksplitting=true
+
+# Soc
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+     ro.soc.manufacturer=MediaTek \
+     ro.soc.model=MT6765G
+
+# Dex
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+     dalvik.vm.dex2oat64.enabled=true \
+     pm.dexopt.install=speed-profile \
+     pm.dexopt.bg-dexopt=speed-profile \
+     pm.dexopt.boot=verify \
+     pm.dexopt.first-boot=quicken \
+     dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5 \
+     dalvik.vm.dex2oat-threads=6
+
+# Bluetooth
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.device.class_of_device?=90,2,12 \
+    bluetooth.hardware.power.operating_voltage_mv=3300 \
+    bluetooth.profile.asha.central.enabled?=true \
+    bluetooth.profile.avrcp.target.enabled?=true \
+    bluetooth.profile.a2dp.source.enabled?=true \
+    bluetooth.profile.bas.client.enabled?=true \
+    bluetooth.profile.gatt.enabled?=true \
+    bluetooth.profile.hfp.ag.enabled?=true \
+    bluetooth.profile.hid.device.enabled?=true \
+    bluetooth.profile.hid.host.enabled?=true \
+    bluetooth.profile.map.server.enabled?=true \
+    bluetooth.profile.opp.enabled?=true \
+    bluetooth.profile.pan.nap.enabled?=true \
+    bluetooth.profile.pan.panu.enabled?=true \
+    bluetooth.profile.pbap.server.enabled?=true \
+    bluetooth.profile.sap.server.enabled?=true
+
+PRODUCT_SYSTEM_PROPERTIES += \
+    persist.bluetooth.system_audio_hal.enabled=true \
+    persist.bluetooth.bluetooth_audio_hal.disabled=false \
+    persist.bluetooth.a2dp_offload.disabled=true \
+    ro.bluetooth.a2dp_offload.supported=false
+

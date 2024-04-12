@@ -2,6 +2,7 @@ cc_binary {
     name: "android.hardware.biometrics.fingerprint@2.1-service.RMX2185",
     defaults: ["hidl_defaults"],
     init_rc: ["android.hardware.biometrics.fingerprint@2.1-service.RMX2185.rc"],
+    vintf_fragments: ["android.hardware.biometrics.fingerprint@2.1-service.RMX2185.xml"],
     relative_install_path: "hw",
     srcs: [
         "BiometricsFingerprint.cpp",
@@ -18,7 +19,6 @@ cc_binary {
         "libutils",
         "libbase",
         "android.hardware.biometrics.fingerprint@2.1",
-        "vendor.oppo.hardware.biometrics.fingerprint@2.1",
+        "vendor.oplus.hardware.biometrics.fingerprint@2.1",
     ],
-    proprietary: true,
 }

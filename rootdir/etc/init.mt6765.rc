@@ -1,11 +1,10 @@
-import /system/etc/init/init.safailnet.rc
-
-on early-init 
-     start adbd
 
 on init
     mount none /vendor/lost+found /vendor/overlay bind
     setprop sys.usb.ffs.aio_compat 1
+
+    mount none /system/bin/hw/android.hardware.usb@1.0-service.RMX2185 /vendor/bin/hw/android.hardware.usb@1.1-service-mediatek bind
+    mount none /vendor/lost+found /vendor/etc/init/android.hardware.usb@1.1-service-mediatek.rc bind
 
     # Boot time fs tune
     write /sys/block/sda/queue/iostats 0
@@ -25,6 +24,12 @@ on init
     write /sys/block/sdc/queue/nr_requests 256
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
+    setprop persist.vendor.mtk.volte.enable 0
+    setprop persist.vendor.mtk_ct_volte_support 0
+    setprop persist.dbg.allow_ims_off 1
+    setprop persist.dbg.volte_avail_ovr 1
+    setprop persist.dbg.vt_avail_ovr 1
+    setprop persist.dbg.wfc_avail_ovr 1
     setprop persist.vendor.vilte_support 0
 
     # Custom overrides that need to happen right on boot
@@ -43,15 +48,12 @@ on post-fs
     #  so it is fine to just revert back)
     umount /vendor/etc/fstab.mt6765
 
-on property:sys.boot_completed=1
-    # Restrict permissions to socket file 
-    # to hide Magisk & co.
-    chmod 440 /proc/net/unix
-
 on post-fs-data
     # VideoCodec
     chmod 0666 /dev/video0
     chmod 0666 /dev/video1
+    chmod 0666 /dev/Vcodec
+    chmod 0666 /dev/Vcodec1
 
     # Create Goodix FP related directories
     mkdir /data/gf_data 0700 system system
@@ -74,8 +76,13 @@ on post-fs-data
     chown system system /sys/class/power_supply/usb/otg_switch
     chmod 0666 /sys/class/power_supply/usb/otg_switch
 
-    # Disable edge limit control interface
-    write /proc/touchpanel/oppo_tp_limit_enable 0
+    # Smart Charging
+    chown system system /sys/class/power_supply/battery/input_suspend
+    chown system system /sys/class/power_supply/battery/charging_enabled
+    chown system system /sys/class/power_supply/battery/mmi_charging_enable
+    chmod 0666 /sys/class/power_supply/battery/input_suspend
+    chmod 0666 /sys/class/power_supply/battery/charging_enabled
+    chmod 0666 /sys/class/power_supply/battery/mmi_charging_enable
 
     # Services
     stop console
@@ -83,15 +90,11 @@ on post-fs-data
 on boot
     # Set permission for Goodix FP
     chown system system /dev/goodix_fp
+    chown system system /dev/esfp0
 
-    # DT2W
-    chown system system /proc/touchpanel/double_tap_enable
-    chmod 0666 /proc/touchpanel/double_tap_enable
-    write /proc/touchpanel/double_tap_enable 1
-
-    # WiFi fix by Techyminati
-    setprop ro.boot.vendor.overlay.static false
-    setprop vendor.connsys.driver.ready yes
+ 
+on property:sys.boot_completed=1
+    setprop vendor.oppo.biometrics.fingerprint.boot_completed 1
 
 on property:sys.boot_completed=1
     # Toggle airplane mode on and off on boot to enable volte.
@@ -119,8 +122,7 @@ on property:sys.boot_completed=1
     write /sys/block/sdc/queue/iostats 1
     write /sys/block/dm-0/queue/read_ahead_kb 128
     write /sys/block/dm-1/queue/read_ahead_kb 128
-
-    setprop vendor.oppo.biometrics.fingerprint.boot_completed 1
+    write /dev/stune/top-app/schedtune.boost 1
 
 service oppo_fingerprints_sh /vendor/bin/sh /vendor/bin/init.oppo.fingerprints.sh
     class main
@@ -131,7 +133,8 @@ service face_hal /system/bin/true
     oneshot
     disabled
 
-service set_zram /vendor/bin/sh /system/etc/init/set_zram.sh
+# Import Swap Enable Script from realmeUI
+service swap_enable /system/bin/sh /system/etc/swap_enable.sh
     class late_start
     disabled
     user root
@@ -153,4 +156,25 @@ on property:sys.boot_completed=1
     chown root root /sys/module/ged/parameters/gx_force_cpu_boost
     chown root root /proc/cpufreq/cpufreq_power_mode
     chown root root /proc/cpufreq/cpufreq_cci_mode
-    start set_zram
+    chmod +x /system/etc/swap_enable.sh
+    start swap_enable
+
+on property:persist.vendor.radio.port_index=""
+    setprop sys.usb.config adb
+
+# Include logger service
+service logger /system/bin/logcat -b all -D -f /cache/boot_log.txt
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+on post-fs-data
+    # Clear existing log and start the service
+    rm /cache/boot_log.txt
+    start logger
+
+on property:sys.boot_completed=1
+    # Stop the logger service
+    stop logger

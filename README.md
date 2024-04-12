@@ -1,6 +1,12 @@
-Realme C11/C12/C15 Device Tree - RMX2185/RMX2189/RMX2180
-================================================================
+Copyright (C) 2020 - Android Open Source Project
 
+Device Tree - Realme C11 / Realme C12 / Realme C15 (RMX2185)
+===============================================================
+
+realme C11 / C12 & C15 ( codenamed _"RMX2185"_) are same devices with just RAM & ROM being the difference between them !
+
+This device tree commonize them as "RMX2185"
+================================================================
 
 Basic   | Spec Sheet
 -------:|:-------------------------
@@ -8,24 +14,18 @@ CPU     | Octa-core (4x2.3 GHz Cortex-A53 & 4x1.8 GHz Cortex-A53)
 Chipset | MediaTek Helio G35 (12 nm)
 GPU     | PowerVR GE8320
 Memory  | 2/3/4 GB
-Shipped Android Version | Android 10, realme UI 1.0 
-Storage | 32/64 GB (eMMC type)
-MicroSD | Up to 512 GB 
-Battery | Li-Po 5000 mAh (RMX2185)/ 6000 mAh (RMX2180 & RMX2185), non-removable
-Dimensions | 164.5 x 75.9 x 9.8 mm (6.48 x 2.99 x 0.39 in)
-Display | 720 x 1560 pixels, 6.50" IPS LCD, 19.5:9 ratio (~264 ppi density)
-Rear Camera 1 | 13 MP, f/2.2, (wide), PDAF
-Rear Camera 2 | 2 MP B/W, f/2.4
-Rear Camera 3 | 2 MP, f/2.4
-Front Camera | 5 MP, f/2.0, (wide)
-Release Month | 2020, June 30 (RMX2185), 2020, August 14 (RMX2189), 2020, July 28 (RMX2180) 
+Shipped Android Version | Android 10, realme UI 1.0 (Upgradeable to Android 11,realme UI 2.0)
+Storage | 32/64 GB (eMMC)
+MicroSD | Up to 512 GB (Hybrid)
+Battery | Li-Po 5000 mAh, non-removable
+Dimensions | 164.4 x 75.9 x 9.1 mm (6.47 x 2.99 x 0.36 in)
+Display | 720 x 1560 pixels, 6.50" IPS LCD, 20:9 ratio (~270 ppi density)
+Rear Camera  | Dual : 13 MP, f/2.2, AF, 1.25µm ; 2MP , f/2.4 (depth)
+Front Camera | 	5 MP, f/2.0, 1/2.8", 0.9µm
+Release Month | 2020, June 30
 
-![Realme C12](https://fdn2.gsmarena.com/vv/pics/realme/realme-c12-2.jpg "Realme C12")
+![Realme C11](https://fdn2.gsmarena.com/vv/pics/realme/realme-c11-1.jpg "Realme C11")
 
-
-Patches needed:
-
-1. Needed to boot: https://github.com/SamarV-121/android_vendor_extra/blob/lineage-18.1/patches/external/selinux/0001-Revert-libsepol-Make-an-unknown-permission-an-error-.patch
-2. Needed for AV fix: https://github.com/phhusson/platform_frameworks_av/commit/624cfc90b8bedb024f289772960f3cd7072fa940.patch
-
-Copyright (C) 2021 Lineage OS
+Note: 
+* Apply following [***Patches***](https://github.com/techyminati/patches) On Respective Directories of ROM Source is Mandatory for Boot ! 
+* This device tree is based on realmeUI 2.0 Firmware.

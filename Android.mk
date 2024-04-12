@@ -16,6 +16,9 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),RMX2185)
-include $(call all-makefiles-under,$(LOCAL_PATH))
+ifneq ($(filter RMX2185,$(TARGET_DEVICE)),)
+$(call add-radio-file,dynamic-remove-oppo)
+
+  subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
+  $(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
 endif
