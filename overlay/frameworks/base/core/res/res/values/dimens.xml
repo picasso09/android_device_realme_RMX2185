@@ -20,6 +20,6 @@
 <resources>
 
     <!-- Location on the screen of the center of the physical power button. -->
-    <dimen name="physical_power_button_center_screen_location_y">700px</dimen>
+    <dimen name="physical_power_button_center_screen_location_y">760px</dimen>
 
 </resources>

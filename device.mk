@@ -26,12 +26,12 @@ $(call inherit-product, vendor/realme/RMX2185/RMX2185-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # IMS
-$(call inherit-product, vendor/realme/RMX2185-ims/RMX2185-ims.mk)
+#$(call inherit-product, vendor/realme/RMX2185-ims/RMX2185-ims.mk)
 
 PRODUCT_SHIPPING_API_LEVEL := 29
 
 # VNDK
-PRODUCT_EXTRA_VNDK_VERSIONS := 29
+PRODUCT_EXTRA_VNDK_VERSIONS := 	29
 
 # Dynamic Partition
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -42,13 +42,18 @@ TARGET_SCREEN_HEIGHT := 1600
 TARGET_SCREEN_WIDTH := 720
 TARGET_BOOTANIM_LOW_RES := true
 
+# Audio Bt
+PRODUCT_PACKAGES += \
+    libaptX_encoder \
+    libaptXHD_encoder
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.bluetooth.default  \
     audio.r_submix.default \
     audio.usb.default \
     audio_policy.stub \
-    Snap
+    GoogleCameraGo
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
@@ -84,7 +89,9 @@ PRODUCT_PACKAGES += \
 
 # ImsInit hack
 PRODUCT_PACKAGES += \
-    ImsInit
+    ImsInit \
+    libshim_vtservice \
+    MtkInCallService
 
 # Init
 PRODUCT_PACKAGES += \
@@ -122,9 +129,9 @@ PRODUCT_PACKAGES += \
     RMX2189_overlay
 
 # part
-PRODUCT_PACKAGES += \
-    parts.rc \
-    RealmeParts
+#PRODUCT_PACKAGES += \
+#    parts.rc \
+#    RealmeParts
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -138,7 +145,9 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/permissions/privapp-permissions-mediatek.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-mediatek.xml \
     $(DEVICE_PATH)/permissions/privapp-permissions-whitelist-system.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-whitelist-system.xml \
     $(DEVICE_PATH)/permissions/privapp-permissions-whitelist-system_ext.xml:$(TARGET_COPY_OUT_SYSTEM)/system_ext/etc/permissions/privapp-permissions-whitelist-system_ext.xml \
-    $(DEVICE_PATH)/permissions/privapp-permissions-whitelist-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-whitelist-product.xml
+    $(DEVICE_PATH)/permissions/privapp-permissions-whitelist-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-whitelist-product.xml \
+    $(DEVICE_PATH)/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-hotword.xml \
+    $(DEVICE_PATH)/permissions/privapp-permissions-org.lineageos.realme.imsinit.xml:system/etc/permissions/privapp-permissions-org.lineageos.realme.imsinit.xml
 
 # Properties
 -include $(DEVICE_PATH)/system_prop.mk
@@ -157,7 +166,7 @@ PRODUCT_PACKAGES += \
 # Screen density
 PRODUCT_AAPT_CONFIG := xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-PRODUCT_AAPT_PREBUILT_DPI := xhdpi xxhdpi 
+PRODUCT_AAPT_PREBUILT_DPI := xhdpi xxhdpi
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)

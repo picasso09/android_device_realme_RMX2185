@@ -20,6 +20,5 @@ allow init sysfs_battery_supply:file { setattr };
 # Allow init to create socket_device(s)
 allow init socket_device:sock_file create_file_perms;
 
-# Allow init read zram_exec
-allow init set_zram_exec:file read;
-
+# Allow init execute zram_exec
+allow init set_zram_exec:file { execute execute_no_trans read open write getattr };
