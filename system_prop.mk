@@ -2,6 +2,7 @@
 # Bootanimation
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.config.nocheckin=1
+
 # Camera
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.google.camera,org.pixelexperience.faceunlock \
@@ -55,6 +56,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.zram.mark_idle_delay_mins=60 \
     ro.zram.first_wb_delay_mins=180 \
     ro.zram.periodic_wb_delay_hours=24
+
+# BTAUDIO
+PRODUCT_SYSTEM_PROPERTIES += \
+    persist.bluetooth.system_audio_hal.enabled=11
 	
 # Tweak the memory management of the device, enable more background apps.. etc..
 PRODUCT_PROPERTY_OVERRIDES += \
