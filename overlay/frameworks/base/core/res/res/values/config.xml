@@ -51,7 +51,7 @@
     <!-- Flag specifying whether WFC over IMS should be available for carrier: independent of
          carrier provisioning. If false: hard disabled. If true: then depends on carrier
          provisioning, availability etc -->
-     <bool name="config_carrier_wfc_ims_available">false</bool>
+     <bool name="config_carrier_wfc_ims_available">true</bool>
 
     <!-- Set to true to add links to Cell Broadcast app from Settings and MMS app. -->
      <bool name="config_cellBroadcastAppLinks">true</bool>
@@ -63,7 +63,7 @@
      <bool name="config_device_vt_available">true</bool>
 
     <!-- Flag specifying whether WFC over IMS is available on device -->
-     <bool name="config_device_wfc_ims_available">false</bool>
+     <bool name="config_device_wfc_ims_available">true</bool>
 
      <!-- Control whether the always on display mode is available. This should only be enabled on
           devices where the display has be tuned to be power efficient in DOZE and/or DOZE_SUSPEND
@@ -246,6 +246,10 @@
     <!-- Boolean indicating if restoring network selection should be skipped -->
     <!-- The restoring is handled by modem if it is true-->
      <bool name="skip_restoring_network_selection">false</bool>
+
+    <!-- Whether or not wcg (wide color gamut) should be enabled on this device,
+         we only enabled it while the device has ability of mixed color spaces composition -->
+    <bool name="config_enableWcgMode">true</bool>
 
     <!-- Define Rounded Corner -->
     <dimen name="rounded_corner_radius_bottom">70.0px</dimen>
@@ -751,5 +755,8 @@
 	
     <!-- Set icon mask to circle -->
     <string name="config_icon_mask" translatable="false">"M50 0A50 50,0,1,1,50 100A50 50,0,1,1,50 0"</string>
+
+    <!-- Exempt ImsService from privacy (location) indicators -->
+    <string name="config_systemAudioIntelligence" translatable="false">com.mediatek.ims</string>
 	
 </resources>

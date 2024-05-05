@@ -10,14 +10,14 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Display
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.sf.lcd_density=410
+    ro.sf.lcd_density=320
 
 # IMS
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
     persist.dbg.wfc_avail_ovr=1
-	
+
 # LMKD
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.lmk.psi_complete_stall_ms=150 \
@@ -60,7 +60,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # BTAUDIO
 PRODUCT_SYSTEM_PROPERTIES += \
     persist.bluetooth.system_audio_hal.enabled=11
-	
+
 # Tweak the memory management of the device, enable more background apps.. etc..
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.fha_enable=true \

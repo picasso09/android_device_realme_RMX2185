@@ -55,7 +55,6 @@ PRODUCT_PACKAGES += \
     audio_policy.stub \
     GoogleCameraGo
 
-
 # Bluetooth Audio (System-side HAL, sysbta)
 PRODUCT_PACKAGES += \
     audio.sysbta.default \
