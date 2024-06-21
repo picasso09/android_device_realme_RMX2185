@@ -27,7 +27,6 @@ on post-fs-data
     chown bluetooth bluetooth /dev/ttyGS2
     chmod 0660 /dev/ttyGS2
 
-
 on boot
 
 # GPS
@@ -47,3 +46,68 @@ service lbs_dbg /system/bin/lbs_dbg
 
 on property:persist.vendor.em.dy.debug=1
     stop lbs_dbg
+
+on boot
+
+#
+# Connectivity related services (Begin)
+#
+# WMT
+service wmt_loader /vendor/bin/wmt_loader
+    user system
+    group system
+    oneshot
+
+service wmt_launcher /vendor/bin/wmt_launcher -p /vendor/firmware/ -o 1
+    user system
+    group system
+
+# Conninfra
+service conninfra_loader /vendor/bin/conninfra_loader
+    class core
+    user system
+    group system
+    oneshot
+
+service wlan_assistant /vendor/bin/wlan_assistant
+    class main
+    user wifi
+    group system gps inet
+
+#
+# Connectivity related services (End)
+#
+
+#
+# Connectivity related kernel objects (Begin)
+#
+
+# load wmt_drv
+on boot
+    insmod /vendor/lib/modules/wmt_drv.ko
+
+# load conninfra driver
+on boot
+    insmod /vendor/lib/modules/conninfra.ko
+
+# load bt_drv
+on property:vendor.connsys.driver.ready=yes
+    insmod /vendor/lib/modules/bt_drv.ko
+
+# load wifi chrdev driver and wlan driver after wmt_loader finish
+on property:vendor.connsys.driver.ready=yes
+    insmod /vendor/lib/modules/wmt_chrdev_wifi.ko
+    insmod /vendor/lib/modules/wlan_drv_${ro.vendor.wlan.gen}.ko
+    start wlan_assistant
+
+# load fmradio_drv
+on property:vendor.connsys.driver.ready=yes
+    insmod /vendor/lib/modules/fmradio_drv.ko
+
+# load gps_drv
+on property:vendor.connsys.driver.ready=yes
+  insmod /vendor/lib/modules/gps_drv.ko
+
+#
+# Connectivity related kernel objects (End)
+#
