@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2018-2022 ArrowOS
+# Copyright (C) 2018-2022 Lineage OS
 #
 # SPDX-License-Identifier: Apache-2.0
 #
