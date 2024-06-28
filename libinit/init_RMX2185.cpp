@@ -58,40 +58,6 @@ void property_override(char const prop[], char const value[])
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
-void init_opperator_name_properties()
-{
-    char const *opperator_name_file = "/proc/oppoVersion/operatorName";
-    std::string opperator_name;
-
-    if (ReadFileToString(opperator_name_file, &opperator_name)) {
-        /*
-         * Setup ro.separate.soft value to their OPPO project version
-         * For current OPPO project version, here the following mapping:
-         *
-         * 101 -> NON NFC
-         * 111 -> NON NFC
-         * 112 -> NON NFC
-         * 113 -> NFC
-         * 114 -> NON NFC
-         * 115 -> NON NFC
-         * 116 -> NON NFC
-         * 117 -> NON NFC
-         * 121 -> NON NFC
-         * 122 -> NFC
-         * 123 -> NON NFC
-		 * 124 -> NON NFC
-		 * 125 -> NON NFC
-		 * 126 -> NON NFC
-         */
-        if (opperator_name == "113" || opperator_name == "122") {
-            property_override("ro.boot.product.hardware.sku", "dsds");
-        }
-    }
-    else {
-        LOG(ERROR) << "Unable to read operatorName from " << opperator_name_file;
-    }
-}
-
 void set_avoid_gfxaccel_config() {
     struct sysinfo sys;
     sysinfo(&sys);
@@ -104,7 +70,6 @@ void set_avoid_gfxaccel_config() {
 
 void vendor_load_properties() {
     set_avoid_gfxaccel_config();
-    init_opperator_name_properties();
 #ifdef __ANDROID_RECOVERY__
     std::string buildtype = GetProperty("ro.build.type", "userdebug");
     if (buildtype != "user") {
