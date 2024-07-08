@@ -1,23 +1,9 @@
-type set_zram;
-type set_zram_exec;
-type vendor_shell_exec;
-class file { write execute map read getattr open };
-class dir search;
-class blk_file { write open };
-class system { swapon mkswap };
-class process execmem;
+type set_zram, domain, coredomain;
+type set_zram_exec, system_file_type, vendor_file_type, exec_type, file_type;
 
-# Allow the init process to execute set_zram_exec
-allow init set_zram_exec:file { read execute open };
-
-# Allow set_zram domain to execute the shell script
+init_daemon_domain(set_zram)
+allow set_zram_exec shell_exec:file { write execute map read getattr };
 allow set_zram cgroup:dir search;
 allow set_zram cgroup:file rw_file_perms;
-allow set_zram zram_device:blk_file { write open };
-allow set_zram proc_vm:file { write open };
-allow set_zram self:system { swapon mkswap };
-
-# Allow vendor shell to execute system files
 allow vendor_shell_exec system_file:file { write read execute open };
 allow vendor_shell_exec self:process execmem;
-
