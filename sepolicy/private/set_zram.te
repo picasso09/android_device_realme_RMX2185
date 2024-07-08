@@ -1,9 +1,26 @@
 type set_zram, domain, coredomain;
 type set_zram_exec, system_file_type, vendor_file_type, exec_type, file_type;
+type zram_device;
 
+# Allow the init process to execute set_zram_exec
+allow init set_zram_exec:file { read execute open };
+
+# Define set_zram as an init daemon domain
 init_daemon_domain(set_zram)
+
+# Allow set_zram_exec to be executed by the shell
 allow set_zram_exec shell_exec:file { write execute map read getattr };
-allow set_zram cgroup:dir search;
-allow set_zram cgroup:file rw_file_perms;
+
+# Allow set_zram domain to interact with specific files and devices
+allow set_zram self:capability2 { sys_resource };
+allow set_zram sys_block:file { write open setattr };
+allow set_zram sys_block:dir { search open };
+allow set_zram sys_block:file { read open getattr };
+allow set_zram dev_block:blk_file { write open setattr };
+allow set_zram dev_block:dir { search open };
+allow set_zram proc_vm:file { write open setattr };
+allow set_zram proc_vm:dir { search open };
+
+# Allow vendor shell to execute system files
 allow vendor_shell_exec system_file:file { write read execute open };
 allow vendor_shell_exec self:process execmem;
