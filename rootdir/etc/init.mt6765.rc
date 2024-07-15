@@ -98,7 +98,6 @@ on property:sys.boot_completed=1
 
 on boot
     # ZRAM
-    chown system system /system/etc/init/set_zram.sh
     chmod +x /system/etc/init/set_zram.sh
 
     swapon_all /vendor/fstab.enableswap
