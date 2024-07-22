@@ -12,11 +12,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
 # Inherit from device makefile
 $(call inherit-product, device/realme/RMX2185/device.mk)
 
-# Inherit some common Pixel OS stuff.
-$(call inherit-product, vendor/aosp/config/common.mk)
+# Inherit some common Lineage OS stuff.
+$(call inherit-product, vendor/lineage/config/common.mk)
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := aosp_RMX2185
+PRODUCT_NAME := lineage_RMX2185
 PRODUCT_DEVICE := RMX2185
 PRODUCT_BRAND := realme
 PRODUCT_MODEL := RMX2185
@@ -39,3 +39,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-realme
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.fingerprint=$(BUILD_FINGERPRINT)
+

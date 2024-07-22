@@ -19,10 +19,12 @@ pm.dexopt.install=speed-profile
 pm.dexopt.bg-dexopt=speed-profile
 pm.dexopt.boot=verify
 pm.dexopt.first-boot=quicken
-dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5
-dalvik.vm.dex2oat-threads=6
+dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5,6,7
+dalvik.vm.dex2oat-threads=8
 
 # Display
+ro.sf.blurs_are_expensive=1
+ro.surface_flinger.supports_background_blur=1
 debug.sf.enable_hwc_vds=0
 persist.sys.brightness.low.gamma=true
 
@@ -75,3 +77,6 @@ ro.zram.periodic_wb_delay_hours=24
 
 # Zygote
 ro.zygote.preload.enable=0
+
+# matrix prop
+
