@@ -1,0 +1,5 @@
+allow mtk_hal_sensors proc_oppo_devinfo:file r_file_perms;
+allow mtk_hal_sensors proc_oppo_devinfo:dir search;
+allow mtk_hal_sensors proc_oppo_ver:file r_file_perms;
+get_prop(mtk_hal_sensors, system_oppo_sensor_prop)
+set_prop(mtk_hal_sensors, system_oppo_sensor_prop)

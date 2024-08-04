@@ -1,0 +1,14 @@
+[
+  {
+    "repository": "android_vendor_realme_RMX2185",
+    "target_path": "vendor/realme/RMX2185"
+  },
+  {
+    "repository": "android_kernel_realme_RMX2185",
+    "target_path": "kernel/realme/RMX2185"
+  },
+  {
+    "repository": "android_vendor_realme_RMX2185-ims",
+    "target_path": "vendor/realme/RMX2185-ims"
+  }
+]

@@ -1,0 +1,5 @@
+r_dir_file(rild, proc_oppo_ver)
+
+get_prop(rild, vendor_oppo_radio_prop)
+set_prop(rild, vendor_oppo_radio_prop)
+get_prop(rild, vendor_mtk_simswitch_emmode_prop)

@@ -1,0 +1,2 @@
+# Charger
+genfscon sysfs /devices/platform/odm/odm:oppo_charger/power_supply/usb                      u:object_r:sysfs_oppo_charger:s0

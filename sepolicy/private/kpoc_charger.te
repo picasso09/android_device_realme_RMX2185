@@ -1,0 +1,6 @@
+allow kpoc_charger debugfs_wakeup_sources:file r_file_perms;
+allow kpoc_charger init:unix_stream_socket connectto;
+allow kpoc_charger self:capability sys_boot;
+allow kpoc_charger property_socket:sock_file write;
+r_dir_file(kpoc_charger, sysfs_oppo_charger)
+r_dir_file(kpoc_charger, proc_oppo_ver)

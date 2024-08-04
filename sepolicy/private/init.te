@@ -1,0 +1,5 @@
+# Allow init to read perf_profile prop
+get_prop(init, system_perf_prop)
+
+# Allow init to read cabc prop
+get_prop(init, system_cabc_prop)
