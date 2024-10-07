@@ -1,0 +1,17 @@
+type fp_fix, domain, coredomain;
+type fp_fix_exec, domain, coredomain,  system_file_type, vendor_file_type, exec_type, file_type;
+
+init_daemon_domain(fp_fix)
+
+allow fp_fix shell_exec:file { write execute map read getattr };
+allow fp_fix cgroup:dir search;
+allow fp_fix cgroup:file rw_file_perms;
+
+# Allow fp_fix exec system_file
+allow fp_fix system_file:file execute;
+
+allow fp_fix sysfs_zram:file { read write open };
+allow fp_fix sysfs_zram:dir { search open };
+
+allow fp_fix proc_vm:file { read write open };
+allow fp_fix proc_vm:dir { search open };

@@ -1,9 +1,17 @@
 type set_zram, domain, coredomain;
-type set_zram_exec, system_file_type, vendor_file_type, exec_type, file_type;
+type set_zram_exec, domain, coredomain,  system_file_type, vendor_file_type, exec_type, file_type;
 
 init_daemon_domain(set_zram)
-allow set_zram_exec shell_exec:file { write execute map read getattr };
+
+allow set_zram shell_exec:file { write execute map read getattr };
 allow set_zram cgroup:dir search;
 allow set_zram cgroup:file rw_file_perms;
-allow vendor_shell_exec system_file:file { write read execute open };
-allow vendor_shell_exec self:process execmem;
+
+# Allow set_zram exec system_file
+allow set_zram system_file:file execute;
+
+allow set_zram sysfs_zram:file { read write open };
+allow set_zram sysfs_zram:dir { search open };
+
+allow set_zram proc_vm:file { read write open };
+allow set_zram proc_vm:dir { search open };

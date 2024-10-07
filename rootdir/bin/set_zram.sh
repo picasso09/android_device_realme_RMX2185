@@ -1,4 +1,4 @@
-#!/vendor/bin/sh
+#!/system/bin/sh
 echo 'lz4' > /sys/block/zram0/comp_algorithm
 echo 2147483648 > /sys/block/zram0/disksize
 echo 180 > /proc/sys/vm/swappiness

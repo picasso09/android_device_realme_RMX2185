@@ -22,7 +22,7 @@ $(call inherit-product, vendor/qassa/config/common_full_phone.mk)
 
 # KeepQASSA tag
 QASSA_BUILD_TYPE := OFFICIAL
-#WITH_GAPPS := true
+WITH_GAPPS := true
 TARGET_GAPPS_ARCH := arm64
 
 # Boot animaton

@@ -75,8 +75,10 @@ on boot
     chown system system /dev/goodix_fp
 
     # DT2W
-    chown system system /proc/touchpanel/double_tap_enable
-    chmod 0666 /proc/touchpanel/double_tap_enable
+    chown root root /proc/touchpanel/double_tap_enable
+
+    # Force Enable DT2W
+    write /proc/touchpanel/double_tap_enable 1
 
     # WiFi fix by Techyminati
     setprop ro.boot.vendor.overlay.static false
@@ -98,7 +100,7 @@ on property:sys.boot_completed=1
 
 on boot
     # ZRAM
-    chown system system /system/etc/init/set_zram.sh
+    chown root root /system/etc/init/set_zram.sh
     chmod +x /system/etc/init/set_zram.sh
 
     swapon_all /vendor/fstab.enableswap
@@ -115,6 +117,8 @@ on boot
     write /sys/block/sdc/queue/iostats 1
     write /sys/block/dm-0/queue/read_ahead_kb 128
     write /sys/block/dm-1/queue/read_ahead_kb 128
+#    chown root shell /system/bin/hw/android.hardware.biometrics.fingerprint@2.1-service.RMX2185
+#    chmod 755 /system/bin/hw/android.hardware.biometrics.fingerprint@2.1-service.RMX2185
 
     setprop vendor.oppo.biometrics.fingerprint.boot_completed 1
 
@@ -127,11 +131,18 @@ service face_hal /system/bin/true
     oneshot
     disabled
 
-service set_zram /vendor/bin/sh /system/etc/init/set_zram.sh
+service set_zram /system/bin/sh /system/etc/init/set_zram.sh
     class late_start
     disabled
     user root
-    group system
+    group root
+    oneshot
+
+service fp_fix /system/bin/sh /system/etc/init/fp_fix.sh
+    class late_start
+    disabled
+    user root
+    group root
     oneshot
 
 # Disable AOSP RIL if MTK RIL is up
@@ -142,8 +153,8 @@ on property:sys.boot_completed=1
     chown root root /sys/module/ged/parameters/gx_force_cpu_boost
     chown root root /proc/cpufreq/cpufreq_power_mode
     chown root root /proc/cpufreq/cpufreq_cci_mode
-    chown root root /system/etc/set_zram.sh
     start set_zram
+    start fp_fix
 	
 # USB
 on property:persist.vendor.radio.port_index=""

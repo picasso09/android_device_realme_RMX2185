@@ -101,7 +101,8 @@ PRODUCT_PACKAGES += \
     fstab.enableswap \
     fstab.mt6765 \
     perf_profile.sh \
-    set_zram.sh
+    set_zram.sh \
+    fp_fix.sh
 
 # HIDL
 PRODUCT_PACKAGES += \
